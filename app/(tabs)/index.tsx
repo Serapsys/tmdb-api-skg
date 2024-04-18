@@ -1,12 +1,31 @@
 import { StyleSheet } from "react-native";
 
 import EditScreenInfo from "@/components/EditScreenInfo";
+import { useDispatch, useSelector } from "react-redux";
 import { Text, View } from "@/components/Themed";
+import { useEffect, useState } from "react";
+import { fetchDataFromAPI } from "../../utils/api";
+import { getApiConfiguration } from "@/store/homeSlice";
 
-export default function HomeScreenr() {
+export default function HomeScreen() {
+  const dispatch = useDispatch();
+  const { url } = useSelector((state: any) => state.home);
+  useEffect(() => {
+    apiCheck();
+  }, []);
+  const apiCheck = () => {
+    fetchDataFromAPI("/movie/popular")
+      .then((res: any) => {
+        dispatch(getApiConfiguration(res));
+      })
+      .then(() => {
+        console.log("agar", url.total_pages);
+      });
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+      <Text style={styles.title}>{url.total_pages}</Text>
       <View
         style={styles.separator}
         lightColor="#eee"
