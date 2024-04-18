@@ -7,6 +7,8 @@ import { store } from "../store/store";
 import { Provider } from "react-redux";
 
 import { useColorScheme } from "@/components/useColorScheme";
+import { TamaguiProvider } from "tamagui";
+import tamaguiConfig from "@/tamagui.config";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -49,11 +51,13 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
-    <Provider store={store}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-      </Stack>
-    </Provider>
+    <TamaguiProvider config={tamaguiConfig}>
+      <Provider store={store}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+        </Stack>
+      </Provider>
+    </TamaguiProvider>
   );
 }
