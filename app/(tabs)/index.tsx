@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
 import EditScreenInfo from "@/components/EditScreenInfo";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,10 +6,10 @@ import { Text, View } from "@/components/Themed";
 import React, { useEffect, useState } from "react";
 import { fetchDataFromAPI } from "../../utils/api";
 import { getApiConfiguration } from "@/store/homeSlice";
-import { Button, ScrollView } from "tamagui";
 import { ListItemWithImage } from "@/components/Card/ListCard";
 import FlashListCarousel from "@/components/Carousel/FlashListCarousel";
 import useFetch from "@/hooks/useFetch";
+import { Link } from "expo-router";
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ export default function HomeScreen() {
     // apiCheck();
     // console.log("test", url.results);
     if (data) {
-      setMovieData(data.results);
+      setMovieData(data.results.slice(0, 20));
     }
   }, []);
   const apiCheck = () => {
@@ -32,11 +32,25 @@ export default function HomeScreen() {
 
   const popularMoviesCard = ({ item }: any) => {
     return (
-      <ListItemWithImage
-        title={item.original_title}
-        subTitle={item.release_date}
-        uri={item?.backdrop_path}
-      />
+      !loading && (
+        <Link
+          href={{
+            pathname: "/modal",
+            params: { id: item.id },
+          }}
+          asChild
+        >
+          <Pressable>
+            {({ pressed }) => (
+              <ListItemWithImage
+                title={item.original_title}
+                subTitle={item.release_date}
+                uri={item?.backdrop_path}
+              />
+            )}
+          </Pressable>
+        </Link>
+      )
     );
   };
 
@@ -44,7 +58,9 @@ export default function HomeScreen() {
     return loading ? (
       <Text>Loading...</Text>
     ) : (
-      <FlashListCarousel data={movieData} renderItem={popularMoviesCard} />
+      data && (
+        <FlashListCarousel data={movieData} renderItem={popularMoviesCard} />
+      )
     );
   };
 
@@ -59,6 +75,8 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    maxWidth: 300,
+    maxHeight: 500,
   },
   title: {
     fontSize: 20,
