@@ -1,10 +1,12 @@
 import { StyleSheet } from "react-native";
 
+import EditScreenInfo from "@/components/EditScreenInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { Text, View } from "@/components/Themed";
 import React, { useEffect, useState } from "react";
 import { fetchDataFromAPI } from "../../utils/api";
 import { getApiConfiguration } from "@/store/homeSlice";
+import { Button, ScrollView } from "tamagui";
 import { ListItemWithImage } from "@/components/Card/ListCard";
 import FlashListCarousel from "@/components/Carousel/FlashListCarousel";
 import useFetch from "@/hooks/useFetch";
@@ -27,6 +29,7 @@ export default function HomeScreen() {
       dispatch(getApiConfiguration(res));
     });
   };
+
   const popularMoviesCard = ({ item }: any) => {
     return (
       <ListItemWithImage
