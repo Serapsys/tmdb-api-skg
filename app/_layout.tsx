@@ -55,10 +55,7 @@ function RootLayoutNav() {
       <Provider store={store}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen
-            name="Movie Details"
-            options={{ presentation: "transparentModal" }}
-          />
+          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
         </Stack>
       </Provider>
     </TamaguiProvider>

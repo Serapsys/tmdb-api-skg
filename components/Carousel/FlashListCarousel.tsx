@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StatusBar } from "react-native";
+import { View, Text, StatusBar, FlatList } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
 interface Item {
@@ -15,14 +15,7 @@ const FlashListCarousel: React.FC<FlashListCarouselProps> = ({
   data,
   renderItem,
 }) => {
-  return (
-    <FlashList
-      horizontal
-      data={data}
-      renderItem={renderItem}
-      estimatedItemSize={20}
-    />
-  );
+  return <FlatList horizontal data={data} renderItem={renderItem} />;
 };
 
 export default FlashListCarousel;

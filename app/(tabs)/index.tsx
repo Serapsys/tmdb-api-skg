@@ -74,9 +74,8 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    maxWidth: 300,
-    maxHeight: 500,
+    flexShrink: 1,
+    flexGrow: 1,
   },
   title: {
     fontSize: 20,
