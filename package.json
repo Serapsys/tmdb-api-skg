@@ -34,7 +34,8 @@
     "react-native-web": "~0.19.6",
     "react-redux": "^9.1.1",
     "tamagui": "^1.94.5",
-    "expo-secure-store": "~12.8.1"
+    "expo-secure-store": "~12.8.1",
+    "@shopify/flash-list": "1.6.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
