@@ -31,6 +31,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "TMDB",
+          tabBarLabel: "HOME",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
         }}
       />

@@ -16,26 +16,26 @@ export default function HomeScreen() {
   const { url } = useSelector((state: any) => state.home);
   // const { data, loading } = useFetch("/movie/upcoming");
   const { data, loading } = useFetch("/movie/popular");
+  const {} = useFetch("/movies/popular");
   const [movieData, setMovieData] = useState([]);
   useEffect(() => {
-    // apiCheck();
-    // console.log("test", url.results);
     if (data) {
-      setMovieData(data.results.slice(0, 20));
+      setMovieData(data.results.slice(0, 10));
     }
-  }, []);
-  const apiCheck = () => {
-    fetchDataFromAPI("/movie/popular").then((res: any) => {
-      dispatch(getApiConfiguration(res));
-    });
-  };
+  }, [data]);
 
-  const popularMoviesCard = ({ item }: any) => {
+  // const apiCheck = () => {
+  //   fetchDataFromAPI("/movie/popular").then((res: any) => {
+  //     dispatch(getApiConfiguration(res));
+  //   });
+  // };
+
+  const popularMoviesCard = ({ item }: any): React.ReactNode => {
     return (
       !loading && (
         <Link
           href={{
-            pathname: "/modal",
+            pathname: "/Details",
             params: { id: item.id },
           }}
           asChild
@@ -55,32 +55,36 @@ export default function HomeScreen() {
   };
 
   const renderPopularMovies = () => {
-    return loading ? (
-      <Text>Loading...</Text>
-    ) : (
-      data && (
+    return (
+      !loading && (
+        <FlashListCarousel data={movieData} renderItem={popularMoviesCard} />
+      )
+    );
+  };
+
+  const renderTrendingMoview = () => {
+    return (
+      !loading && (
         <FlashListCarousel data={movieData} renderItem={popularMoviesCard} />
       )
     );
   };
 
   return (
-    <View style={styles.container}>
+    <View style={{}}>
       <Text style={styles.title}>Upcoming Movies :</Text>
-      {renderPopularMovies()}
+      {data && renderPopularMovies()}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexShrink: 1,
-    flexGrow: 1,
-  },
+  container: {},
   title: {
     fontSize: 20,
     fontWeight: "bold",
     marginLeft: 20,
+    flex: 1,
   },
   separator: {
     marginVertical: 30,

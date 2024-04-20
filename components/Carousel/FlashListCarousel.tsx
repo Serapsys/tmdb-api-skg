@@ -8,14 +8,23 @@ interface Item {
 
 interface FlashListCarouselProps {
   data: Item[];
-  renderItem: ({ item }: { item: Item }) => JSX.Element;
+  renderItem: any;
 }
 
 const FlashListCarousel: React.FC<FlashListCarouselProps> = ({
   data,
   renderItem,
 }) => {
-  return <FlatList horizontal data={data} renderItem={renderItem} />;
+  return (
+    data?.length > 0 && (
+      <FlashList
+        horizontal
+        data={data}
+        renderItem={renderItem}
+        estimatedItemSize={10}
+      />
+    )
+  );
 };
 
 export default FlashListCarousel;

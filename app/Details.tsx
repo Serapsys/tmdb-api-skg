@@ -18,6 +18,7 @@ export default function ModalScreen() {
           title={data?.original_title || ""}
           uri={data?.backdrop_path || ""}
           subTitle={data?.overview}
+          data={data}
         />
       </View>
     )
