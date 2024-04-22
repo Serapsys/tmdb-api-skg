@@ -15,8 +15,7 @@ export default function HomeScreen() {
   const dispatch = useDispatch();
   const { url } = useSelector((state: any) => state.home);
   // const { data, loading } = useFetch("/movie/upcoming");
-  const { data, loading } = useFetch("/movie/popular");
-  const {} = useFetch("/movies/popular");
+  const { data, loading } = useFetch("/movie/popular"); //call in component
   const [movieData, setMovieData] = useState([]);
   useEffect(() => {
     if (data) {
@@ -62,7 +61,7 @@ export default function HomeScreen() {
     );
   };
 
-  const renderTrendingMoview = () => {
+  const renderTrendingMovies = () => {
     return (
       !loading && (
         <FlashListCarousel data={movieData} renderItem={popularMoviesCard} />

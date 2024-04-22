@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text, StatusBar, FlatList } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
 interface Item {
